@@ -16,7 +16,7 @@ This work is presented in our paper [Bin2Wrong: a Unified Fuzzing Framework for 
   <tr>
     <td><b>Citing this repository:</b></td>
     <td>
-      <code class="rich-diff-level-one">@inproceedings{sherman:ogharn, title = {Bin2Wrong: a Unified Fuzzing Framework for Uncovering Semantic Errors in Binary-to-C Decompilers}, author = {Zao Yang and Stefan Nagy}, booktitle = {{USENIX} {Annual} {Technical} {Conference} ({ATC})}, year = {2025},}</code>
+      <code class="rich-diff-level-one">@inproceedings{yang:bin2wrong, title = {Bin2Wrong: a Unified Fuzzing Framework for Uncovering Semantic Errors in Binary-to-C Decompilers}, author = {Zao Yang and Stefan Nagy}, booktitle = {{USENIX} {Annual} {Technical} {Conference} ({ATC})}, year = {2025},}</code>
     </td>
   </tr>
   <tr>
