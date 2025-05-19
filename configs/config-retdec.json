@@ -1,0 +1,29 @@
+{
+    "Bin2Wrong": {
+        "path": "PATH_TO_BIN2WRONG",
+        "fuzzingDir": "fuzz_dir/retdec/",
+        "mutator": "mutation/libBin2WrongMutator.so",
+        "postdecDir": "post_decompilation/",
+        "postdecName": "post_dec",
+        "qemu": ""
+    },
+    "decompile": {
+        "decompiler": "retdec",
+        "decompilerpath": "PATH_TO_retdec/build/bin/retdec-decompiler",
+        "declib": "post_decompilation/dec_libs/retdec/retdec"
+    },
+    "compile": {
+        "compiler": "clang,gcc,tcc,icx,msvc,o64-clang",
+        "clangflags": "flags/llvm_clang.txt",
+        "gccflags": "flags/gcc.txt",
+        "tccflags": "flags/tcc.txt",
+        "icxflags": "flags/llvm_icx.txt",
+        "msvcflags": "flags/msvc.txt",
+        "csmith": "post_decompilation/csmith_install/include/",
+        "gnu": "/usr/include/x86_64-linux-gnu/",
+        "msvc": "PATH_TO_MSVC/2022/BuildTools/VC/Tools/MSVC/14.38.33130/bin/Hostx64/x64/cl.exe",
+        "msvcinc": "/I PATH_TO_MSVC/Include/10.0.22621.0/ucrt/ /I PATH_TO_MSVC/Include/14.38.33130/include/",
+        "msvclib": "/link /LIBPATH:PATH_TO_MSVC/Include/14.38.33130/lib/x64/ /LIBPATH:PATH_TO_MSVC/Lib/10.0.22621.0/ucrt/x64/ /LIBPATH:PATH_TO_MSVC/Lib/10.0.22621.0/um/x64/",
+        "win2lin": "wine64"
+    }
+  }

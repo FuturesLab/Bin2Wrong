@@ -1,0 +1,1 @@
+clang -c retdec.c -o retdec.o

@@ -1,0 +1,10 @@
+gcc -O0
+gcc -O1
+gcc -O2
+gcc -Os
+gcc -O3
+clang -O0
+clang -O1
+clang -O2
+clang -Os
+clang -O3

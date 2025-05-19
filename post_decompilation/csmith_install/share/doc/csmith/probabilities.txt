@@ -1,0 +1,78 @@
+-*- mode: Text -*-
+
+*****************************************************************************
+1. probability configuration
+
+The idea is that we could control the probability values in the
+csmith by just changing the configuration file.
+
+Usage:
+ (1) ./csmith
+     by default, csmith will use the default probability values;
+
+ (2) ./csmith --dump-default-probabilities <file>
+     the default probability values will be dumped into <file>
+
+ (3) ./csmith --probability-configuration <file>
+     csmith will use the probability configuration in <file>
+
+Configuration file format:
+
+ There are three kinds of probabilities, single probability and group
+ probability, equivalent group probability. Each line represents one
+ probability, either single probability or group probability.
+
+ - single probability, e.g., bitfields_creation_prob=50
+
+ which controls the probability to generate bitfields.  where 100
+ means always-true, 0 means always-false, -1 means using the default
+ value. Any other values between 0 and 100 will overwrite the default
+ value.
+
+ - group probability, e.g.,
+ [statement_prob,statement_block_prob=0,statement_assign_prob=40,statement_ifelse_prob=55,statement_for_prob=70,statement_return_prob=100]
+
+ which controls relavent probabilities in a group. The above example means:
+   * the group name is statement_prob,
+   * we have 40% chance to get statement_assign,
+   * we have (55-40)%, i.e., 15% chance to get statement_ifelse,
+   * we have (70-55)% chance to get statement_for.
+   * ...
+
+Note that all probability symbols(e.g., statement_prog) are fixed in the program.
+ And all values must between [0, 100], where 0 means we won't use it.
+
+It's worth to point out that the sum of all probabilities in group probabilities does not equal to 100. Instead, Group probabilities actually refer to probability distribution. This design choice was based on some Csmith internal logic which deals with random probabilities. For example, statement_assign_prob = 99 doesn't mean that we have 99% chance to generate assign statements.
+
+Let's look at a simplified example. Assume we want to generate three kinds of statements, let's say return-statement, for-statement, and if-else-statement. We also assume we have 25% chance to generate return-statement, 25% chance for for-statement and 50% chance for if-else-statement.
+
+When Csmith determines which kind of statement to be generated, it takes the following steps:
+
+(1) get a random value p which ranges from 0 to 99;
+
+(2) if 0 <= p < 25, then csmith generates return-statement;
+      if 25 <= p < 50, then csmith generatets for-statement;
+     if 50 <= p < 100, then csmith generates if-else-statement;
+
+If you look through a probability output, we will see that the probability values are actually direct mapping to the conditions above. To be more specific, for this simple example, we have group probabilities like this:
+
+[statement_prob,statement_return_prob=25,statement_for_prob=50,statement_if_else_prob=100]
+
+Note that it's a good idea to set statement_return_prob to a
+*non-zero* value. If you set statement_return_prob to 0, then csmith
+will hang forever because it couldn't generate a return-statement for a
+function such as "int foo(void) ...". 
+
+One more thing is that for group probabilities, one probability value must be 100.
+
+ - The idea is that often we have code like unsigned i = rnd_upto(5),
+   where i gets its value from the range of [0, 4] with equal change.
+
+   Format:
+
+   (assign_binary_ops_prob,binary_add_prob=1,binary_sub_prob=1,binary_mul_prob=1,binary_div_prob=1,...)
+
+   where the first symbol is the group name, and value "1" means csmith
+   will generate the corresponding value which represents binary_add_op,
+   "0" means binary_add_op will be filtered out.
+

@@ -1,0 +1,7 @@
+-funsigned-char
+-fsigned-char
+-fno-common
+-fms-extensions
+-fdollars-in-identifiers
+-mms-bitfields
+-mno-sse

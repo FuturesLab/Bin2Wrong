@@ -1,0 +1,54 @@
+#!/usr/bin/python3
+
+import os
+import subprocess
+import sys
+from pathlib import Path
+
+RELYZE_CLI = '/home/user/relyze/RelyzeCLI.exe'
+BIN2WRONG_PATH = str(Path(os.getenv("BIN2WRONGPATH", "/home/user/Bin2Wrong/")))
+
+def relyze_cli_run(params):
+
+    logfile = Path('log.tmp')
+
+    cli = subprocess.run(['wine64', str(RELYZE_CLI), '/output', logfile.name] + params, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+
+    logdata = ''
+
+    if logfile.is_file():
+        with open(logfile.name, 'r', encoding='utf-16-le') as f:
+            logdata = f.read()
+        os.remove(logfile.name)
+
+    if cli.returncode != 0:
+        return False, f'{logdata}\n{cli.stdout.decode()}'
+
+    return True, logdata
+
+def main(input, output=str(os.environ.get('DECOM_CODE_PATH'))):
+
+    func_timeout = 15
+
+    success, res = relyze_cli_run([
+        '/run',
+        '/plugin',
+        BIN2WRONG_PATH+'/decompilers/tools/relyze/decompiler_explorer.rb',
+        '/plugin_commandline',
+        f'/in={input} /out={output} /func_timeout={func_timeout}'
+    ])
+
+    if not success:
+        error = ""
+        with open(output, 'w') as file:
+            file.write(error)
+        return 1
+
+    return 0
+
+if __name__ == '__main__':
+
+    if len(sys.argv) == 2:
+        sys.exit(main(sys.argv[1]))
+    elif len(sys.argv) == 3:
+        sys.exit(main(sys.argv[1], sys.argv[2]))
