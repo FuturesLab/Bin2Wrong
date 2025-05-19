@@ -1,6 +1,6 @@
 # Bin2Wrong: Fuzzing Binary Decompilers
 
-<img align="right" src="logo.png" alt="Bin2Wrong logo" width="220" height="220"/>
+<img align="right" src=".logo.png" alt="Bin2Wrong logo" width="220" height="220"/>
 
 This directory contains the source code of our tool `Bin2Wrong`: our prototype all-in-one fuzzer for finding correctness bugs in **binary-to-C decompilers**.
 
@@ -10,7 +10,7 @@ This work is presented in our paper [Bin2Wrong: a Unified Fuzzing Framework for 
 * [Additional Notes](#additional-notes)
 * [Bug Trophy Case](#bug-trophy-case)
 
-<br><img align="center" src="bin2wrong.png" alt="Bin2Wrong workflow" width="100%"/>
+<br><img align="center" src=".bin2wrong.png" alt="Bin2Wrong workflow" width="100%"/>
 
 <table>
   <tr>
