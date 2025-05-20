@@ -2,9 +2,9 @@
 
 <img align="right" src=".logo.png" alt="Bin2Wrong logo" width="220" height="220"/>
 
-This directory contains the source code of our tool `Bin2Wrong`: our prototype all-in-one fuzzer for finding correctness bugs in **binary-to-C decompilers**.
+This directory contains the source code of our tool `Bin2Wrong`: our prototype all-in-one fuzzer for finding correctness bugs in binary-to-C decompilers.
 
-This work is presented in our paper [Bin2Wrong: a Unified Fuzzing Framework for Uncovering Semantic Errors in Binary-to-C Decompilers](https://futures.cs.utah.edu/papers/25ATC.pdf), appearing in the 2025 USENIX Annual Technical Conference (ATC'25).
+This work is presented in our paper [**Bin2Wrong: a Unified Fuzzing Framework for Uncovering Semantic Errors in Binary-to-C Decompilers**](https://futures.cs.utah.edu/papers/25ATC.pdf), appearing in the 2025 USENIX Annual Technical Conference (ATC'25).
 
 * [Using Bin2Wrong](#using-bin2wrong)
 * [Additional Notes](#additional-notes)
